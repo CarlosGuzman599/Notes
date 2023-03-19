@@ -1,2 +1,2 @@
 # Notes
-Generas Notes
+General Notes
