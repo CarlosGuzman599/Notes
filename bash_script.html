@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="">
+        <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
+        <meta name="generator" content="Hugo 0.108.0">
+        <title>Template</title>
+        <script src="assets/js/bootstrap.js"></script>
+        <script src="assets/js/jquery-3.6.0.min.js"></script>
+        <link href="assets/css/bootstrap.css" rel="stylesheet">
+        <link href="assets/styles.css" rel="stylesheet">
+    </head>
+    <body class="py-4">
+        <h1 class="text-center">Bash Script</h1>
+
+        <p class="text-center mb-0">This note is base at a video by Savitar youtube user, resolving challenge called Bandit by the website Overthewire.</p>
+        <p class="text-center cursiva mt-0">common that the passwords reset</p>
+
+        <div class="mt-1 p-2 text-center">
+            <a href="https://www.youtube.com/watch?v=RUorAzaDftg&t=5125s" target="_blank" class="col-3 btn btn-danger">Video</a>
+            <a href="https://overthewire.org/wargames/bandit/" target="_blank" class="col-3 btn btn-success">Website</a>
+        </div>
+
+
+        <div class="accordion p-5 color-dark" id="accordionExample">
+
+            <div class="accordion-item">
+              <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#bandit0" aria-expanded="false" aria-controls="bandit0">
+                   bandit0
+                </button>
+              </h2>
+              <div id="bandit0" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    <p class="negrita">ssh -p2220 bandit0@bandit.labs.overthewire.org</p>
+                    <br>
+                    <p>The goal of this level is for you to log into the game using SSH. The host to which you need to connect is bandit.labs.overthewire.org, on port 2220. The username is bandit0 and the password is bandit0. Once logged in, go to the Level 1 page to find out how to beat Level 1. The password for the next level is stored in a file called readme located in the home directory. Use this password to log into bandit1 using SSH. Whenever you find a password for a level, use SSH (on port 2220) to log into that level and continue the game.</p>
+                </div>
+              </div>
+            </div>
+        
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#bandit1" aria-expanded="false" aria-controls="bandit1">
+                     bandit1
+                  </button>
+                </h2>
+                <div id="bandit1" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <p class="negrita m-0">ssh -p2220 bandit1@bandit.labs.overthewire.org</p>
+                        <p class="m-0"><span class="color-red">Password: </span>NH2SXQwcBdpmTEzi3bvBHMM9H66vVXjL</p>
+                        <br>
+                        <p>The password for the next level is stored in a file called - located in the home directory</p>
+                        <br>
+                        <p class="negrita">Resolving</p>
+                        <p><span class="color-blue">$ </span>cat ./-</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#bandit2" aria-expanded="false" aria-controls="bandit2">
+                     bandit2
+                  </button>
+                </h2>
+                <div id="bandit2" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <p class="negrita m-0">ssh -p2220 bandit2@bandit.labs.overthewire.org</p>
+                        <p class="m-0"><span class="color-red">Password: </span>rRGizSaX8Mk1RTb1CNQoXTcYZWU6lgzi</p>
+                        <br>
+                        <p>The password for the next level is stored in a file called spaces in this filename located in the home directory</p>
+                        <br>
+                        <p class="negrita">Resolving</p>
+                        <p><span class="color-blue">$ </span>cat ./-</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#bandit2" aria-expanded="false" aria-controls="bandit2">
+                     bandit3
+                  </button>
+                </h2>
+                <div id="bandit2" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <p class="negrita m-0">ssh -p2220 bandit3@bandit.labs.overthewire.org</p>
+                        <p class="m-0"><span class="color-red">Password: </span>aBZ0W5EmUfAf7kHTQeOwd8bauFJ2lAiG</p>
+                        <br>
+                        <p>The password for the next level is stored in a hidden file in the inhere directory</p>
+                        <br>
+                        <p class="negrita">Resolving</p>
+                        <p><span class="color-blue">$ </span>cat ./spaces\ in\ this\ filename</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="headingOne">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#bandit4" aria-expanded="false" aria-controls="bandit4">
+                     bandit4
+                  </button>
+                </h2>
+                <div id="bandit4" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <p class="negrita m-0">ssh -p2220 bandit4@bandit.labs.overthewire.org</p>
+                        <p class="m-0"><span class="color-red">Password: </span>2EW7BBsr6aMMoJ2HjW067dm8EgX26xNe</p>
+                        <br>
+                        <p>The password for the next level is stored in the only human-readable file in the inhere directory. Tip: if your terminal is messed up, try the “reset” command.</p>
+                        <br>
+                        <p class="negrita">Resolving</p>
+                        <p><span class="color-blue">$ </span>find ./inhere/* | xargs file</p>
+                        <p>Now you can see, the file properties to determine, which file is correct.</p>
+                        <p><span class="color-blue">$ </span>cat ./inhere/-file07</p>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </body>
+</html>
