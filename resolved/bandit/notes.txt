@@ -1,0 +1,487 @@
+"https://overthewire.org/wargames/bandit/bandit8.html"
+
+0 -> bandit0
+    The goal of this level is for you to log into the game using SSH. The host to which you need to connect is bandit.labs.overthewire.org, on port 2220. The username is bandit0 and the password is bandit0. Once logged in, go to the Level 1 page to find out how to beat Level 1.
+
+    Commands you may need to solve this level
+    ssh
+
+    Helpful Reading Material
+    Secure Shell (SSH) on Wikipedia
+    How to use SSH on wikiHow
+
+    The password for the next level is stored in a file called readme located in the home directory. Use this password to log into bandit1 using SSH. Whenever you find a password for a level, use SSH (on port 2220) to log into that level and continue the game.
+
+    Commands you may need to solve this level
+    ls , cd , cat , file , du , find
+
+    $cat readme
+
+1 -> NH2SXQwcBdpmTEzi3bvBHMM9H66vVXjL
+    The password for the next level is stored in a file called - located in the home directory
+
+    Commands you may need to solve this level
+    ls , cd , cat , file , du , find
+
+    Helpful Reading Material
+    Google Search for “dashed filename”
+    Advanced Bash-scripting Guide - Chapter 3 - Special Characters
+    
+    $cat ./-
+    $cat $(pwd)/-
+
+2 -> rRGizSaX8Mk1RTb1CNQoXTcYZWU6lgzi
+    The password for the next level is stored in a file called spaces in this filename located in the home directory
+
+    Commands you may need to solve this level
+    ls , cd , cat , file , du , find
+
+    Helpful Reading Material
+    Google Search for “spaces in filename”
+
+    $cat ./'spaces in this filename'
+    $cat  spaces\ in\ this\ filename
+    $cat  spac*
+    $cat  *ename
+    $cat  this
+
+3 -> aBZ0W5EmUfAf7kHTQeOwd8bauFJ2lAiG
+    The password for the next level is stored in a hidden file in the inhere directory.
+
+    Commands you may need to solve this level
+    ls , cd , cat , file , du , find
+
+    $cat ./inhere/.hidden
+    $find . -type f -printf "%f\t%p\t%u\t%g\t%m\n" | column -t
+    $find . -name .hidden | xargs cat
+
+    ***Permisos estandar u=user g=group o=others w=write r=read x=execute: chmod u+wrx,o-wr ./text.txt
+    ***Permisos especiales chattr https://www.ochobitshacenunbyte.com/2020/11/19/como-utilizo-el-comando-chattr-en-linux/ para mirar los permisos especiales con el comando lsattr
+    
+4 -> 2EW7BBsr6aMMoJ2HjW067dm8EgX26xNe
+    The password for the next level is stored in the only human-readable file in the inhere directory. Tip: if your terminal is messed up, try the “reset” command.
+
+    Commands you may need to solve this level
+    ls , cd , cat , file , du , find
+    
+    $file ./inhere/*
+    $find . -name *file07 | xargs cat
+
+5 -> lrIWWI6bB37kxfiCQZqUdOIYfr6eEeqR
+    The password for the next level is stored in a file somewhere under the inhere directory and has all of the following properties:
+
+    human-readable
+    1033 bytes in size
+    not executable
+    Commands you may need to solve this level
+    ls , cd , cat , file , du , find
+
+    ~$cat $(find . -type f -readable -size 1033c ! -executable)
+
+6 -> P4L4vucdmLnm8I7Vl7jG1ApGSfjYKqJU
+    The password for the next level is stored somewhere on the server and has all of the following properties:
+
+    owned by user bandit7
+    owned by group bandit6
+    33 bytes in size
+    Commands you may need to solve this level
+    ls , cd , cat , file , du , find , grep
+
+    ***$cat texto.txt | grep "^hola$" // con nada al inicio y que termine con a
+    ***$cat texto.txt | grep "^hola$" -n //muestra el numero de linea de la salida
+    ***$cat texto.txt | awk "NR==10" //imprime lo qeu hay en la linea 10(por ejemplo)
+    ***sed: como el grep y cut ,tr como el replace_string pero con caracteres anivel de cadena,awk como grep,cut,tail
+
+    $cat $(find / -size 33c -group bandit6 -user bandit7 2>/dev/null)
+    $find / -size 33c -group bandit6 -user bandit7 2>/dev/null | xargs cat
+
+7 -> z7WtoNQU2XfjmMtWA8u5rN4vzqu4v99S
+    The password for the next level is stored in the file data.txt next to the word millionth
+
+    Commands you may need to solve this level
+    man, grep, sort, uniq, strings, base64, tr, tar, gzip, bzip2, xxd
+
+    $cat ./* | grep millionth
+    $grep millionth ./data.txt
+    $awk "/millionth/" ./data.txt
+    $awk "/millionth/" ./data.txt | awk '{print $2}'
+    $awk "/millionth/" ./data.txt | awk 'NF{print $NF}'                                                                                                                                                                                            
+
+8 -> TESKZC0XvTetK0S9xNwm25STk5iWrBvP
+    The password for the next level is stored in the file data.txt and is the only line of text that occurs only once
+
+    Commands you may need to solve this level
+    grep, sort, uniq, strings, base64, tr, tar, gzip, bzip2, xxd
+
+    $cat ./data.txt | sort | uniq -u
+    $sort ./data.txt | uniq -u
+
+9 -> EN632PlfYiZbn3PhVK3XOGSlNInNE00t
+    The password for the next level is stored in the file data.txt in one of the few human-readable strings, preceded by several ‘=’ characters.
+
+    Commands you may need to solve this level
+    grep, sort, uniq, strings, base64, tr, tar, gzip, bzip2, xxd
+
+    $contador=1; strings ./data.txt | grep "===" | while read line; do echo "L$contador: $line"; let contador+=1;done | awk 'NR==4' | awk 'NF{print $NF}'
+
+10 -> G7w8LIi6J3kTb8A7j9LgrywtEUlyyp6s
+    The password for the next level is stored in the file data.txt, which contains base64 encoded data
+
+    Commands you may need to solve this level
+    grep, sort, uniq, strings, base64, tr, tar, gzip, bzip2, xxd
+
+    Helpful Reading Material
+    Base64 on Wikipedia
+
+    $base64 -d ./data.txt //para decodificar
+    $base64 ./data.txt //para codificar
+
+11 -> 6zPeziLdR2RKNdNYFNb6nVCKzphlXHBM
+    The password for the next level is stored in the file data.txt, where all lowercase (a-z) and uppercase (A-Z) letters have been rotated by 13 positions
+
+    Commands you may need to solve this level
+    grep, sort, uniq, strings, base64, tr, tar, gzip, bzip2, xxd
+
+    Helpful Reading Material
+    Rot13 on Wikipedia
+
+    $cat ./data.txt | tr '[G-ZA-Fg-za-f]' '[T-ZA-St-za-s]' | awk 'NF{print $NF}'
+
+12 -> JVNBBFSmZwKKOP0XbFXOoW8chDz5yVRv
+    The password for the next level is stored in the file data.txt, which is a hexdump of a file that has been repeatedly compressed. For this level it may be useful to create a directory under /tmp in which you can work using mkdir. For example: mkdir /tmp/myname123. Then copy the datafile using cp, and rename it using mv (read the manpages!)
+
+    Commands you may need to solve this level
+    grep, sort, uniq, strings, base64, tr, tar, gzip, bzip2, xxd, mkdir, cp, mv, file
+
+    Helpful Reading Material
+    Hex dump on Wikipedia
+
+    ***xxd:para el manejo de archivos hexadecimales
+
+    ./descompresor.sh
+
+13 -> wbWdlBxEir4CaE8LaPhauuOo6pwRmrDw
+    The password for the next level is stored in /etc/bandit_pass/bandit14 and can only be read by user bandit14. For this level, you don’t get the next password, but you get a private SSH key that can be used to log into the next level. Note: localhost is a hostname that refers to the machine you are working on
+
+    Commands you may need to solve this level
+    ssh, telnet, nc, openssl, s_client, nmap
+
+    Helpful Reading Material
+    SSH/OpenSSH/Keys
+
+
+    bandit13@bandit:~$ ls   --------------------------------------------------->miramos que la llave este ahi
+    sshkey.private
+    bandit13@bandit:~$ ssh -i sshkey.private bandit14@localhost -p2220  --------------------------------------------------->le mandamos el parametro "-i" para referenciar archivo de identidad, le pasamos el archivo, le pasamos el host y el puerto
+    bandit14@bandit:~$ cat /etc/bandit_pass/bandit14    --------------------------------------------------->ya nos conecta al bandit14 y de ahi imprimir lo que hay en el archivo solicitado
+
+14 -> fGrHPx402xGC7U7rXKDaxiWFTOiF0ENq
+    The password for the next level can be retrieved by submitting the password of the current level to port 30000 on localhost.
+
+    Commands you may need to solve this level
+    ssh, telnet, nc, openssl, s_client, nmap
+
+    Helpful Reading Material
+    How the Internet works in 5 minutes (YouTube) (Not completely accurate, but good enough for beginners)
+    IP Addresses
+    IP Address on Wikipedia
+    Localhost on Wikipedia
+    Ports
+    Port (computer networking) on Wikipedia
+
+
+    bandit14@bandit:~$ echo "fGrHPx402xGC7U7rXKDaxiWFTOiF0ENq" | nc localhost 30000
+
+15 -> jN2kgmIXJ6fShzhT2avhotn4Zcka6tnt
+    The password for the next level can be retrieved by submitting the password of the current level to port 30001 on localhost using SSL encryption.
+
+    Helpful note: Getting “HEARTBEATING” and “Read R BLOCK”? Use -ign_eof and read the “CONNECTED COMMANDS” section in the manpage. Next to ‘R’ and ‘Q’, the ‘B’ command also works in this version of that command…
+
+    Commands you may need to solve this level
+    ssh, telnet, nc, openssl, s_client, nmap
+
+    Helpful Reading Material
+    Secure Socket Layer/Transport Layer Security on Wikipedia
+    OpenSSL Cookbook - Testing with OpenSSL
+
+
+    bandit15@bandit:~$ openssl s_client -connect localhost:30001
+    CONNECTED(00000003) ---------------------------------------------->imprime mas texto y se queda en la espera del password de nivel actual
+    jN2kgmIXJ6fShzhT2avhotn4Zcka6tnt
+    Correct!
+    JQttfApK4SeyHwDlI9SXGR50qclOAil1
+    closed
+
+16 -> JQttfApK4SeyHwDlI9SXGR50qclOAil1
+    The credentials for the next level can be retrieved by submitting the password of the current level to a port on localhost in the range 31000 to 32000. First find out which of these ports have a server listening on them. Then find out which of those speak SSL and which don’t. There is only 1 server that will give the next credentials, the others will simply send back to you whatever you send to it.
+
+    Commands you may need to solve this level
+    ssh, telnet, nc, openssl, s_client, nmap
+
+    Helpful Reading Material
+    Port scanner on Wikipedia
+
+    bandit16@bandit:~$nmap --open -T5 -v -n -p31000-32000 localhost ------------------------------------------------------->con nmap miramos los puertos disponibles, nos  muestra una lista probamos uno por uno(no son muchos)
+    bandit16@bandit:~$openssl s_client -connect localhost:31790 ------------------------------------------------------->en este caso fue por este puerto, espero la contrasenia del nivel actual y imprime info y al ultimo la frace "correct!" y despues una clabe ssh
+    bandit16@bandit:~$mktemp -d ------------------------------------------------------->creamos un directoria temporal para poder trabajar
+    bandit16@bandit:~$cd /tmp/tmp.JguU7zQAV1    ------------------------------------------------------->entramos al directorio
+    bandit16@bandit:~$nano sshkey   ------------------------------------------------------->creamos el archivo con la llave
+    bandit16@bandit:~$ls    ------------------------------------------------------->comprovamos su almecenamiento
+    bandit16@bandit:~$chmod 600 sshkey  ------------------------------------------------------->le damos los permisos para ssh la pueda usar
+    bandit16@bandit:~$ssh -i sshkey bandit17@localhost -p2220   ------------------------------------------------------->lanzamos la conexion
+    bandit17@bandit:~$cat /etc/bandit_pass/bandit17    ------------------------------------------------------->una vez adentro miramos el archivo que contiene el password(como se miro en niveles tras)
+
+17 -> VwOSWtCA7lRKkTfbr2IDh6awj9RNZM5e
+    There are 2 files in the homedirectory: passwords.old and passwords.new. The password for the next level is in passwords.new and is the only line that has been changed between passwords.old and passwords.new
+
+    NOTE: if you have solved this level and see ‘Byebye!’ when trying to log into bandit18, this is related to the next level, bandit19
+
+    Commands you may need to solve this level
+    cat, grep, ls, diff
+    bandit17@bandit:~$ diff passwords.old passwords.new -n
+    d42 1
+    a42 1
+    hga5tuuCLF6fFzUpnagiMN8ssu9LFrdg
+
+18 -> hga5tuuCLF6fFzUpnagiMN8ssu9LFrdg
+    The password for the next level is stored in a file readme in the homedirectory. Unfortunately, someone has modified .bashrc to log you out when you log in with SSH.
+
+    Commands you may need to solve this level
+    ssh, ls, cat
+
+    $ssh -p2220 bandit18@bandit.labs.overthewire.org "bash --norc" ------------------------------------------->forzamos la terminal a que imediatamente despues de loggearse se pause en terminal, se mira como si no estubiera funcionando la termional, pero podemos lanzar el comando "cat readme*" para que imprima el password
+
+19 -> awhqfNnAbc1naukrpqDYcF95h7HoMTrC
+    To gain access to the next level, you should use the setuid binary in the homedirectory. Execute it without arguments to find out how to use it. The password for this level can be found in the usual place (/etc/bandit_pass), after you have used the setuid binary.
+
+    Helpful Reading Material
+    setuid on Wikipedia
+
+    bandit19@bandit:~$ ./bandit20-do bash -p
+    bash-5.1$ whoami
+    bandit20
+    bash-5.1$ cat /etc/bandit_pass/bandit20
+
+20 -> VxCazJaVykI6W36BkBU0mJTCM8rR95XT
+    There is a setuid binary in the homedirectory that does the following: it makes a connection to localhost on the port you specify as a commandline argument. It then reads a line of text from the connection and compares it to the password in the previous level (bandit20). If the password is correct, it will transmit the password for the next level (bandit21).
+
+    NOTE: Try connecting to your own network daemon to see if it works as you think
+
+    Commands you may need to solve this level
+    ssh, nc, cat, bash, screen, tmux, Unix ‘job control’ (bg, fg, jobs, &, CTRL-Z, …)
+
+    Terminal 1
+    $nc -nlvp 8080 --------------------------------------->ponemos la terminal a escuchar por el puerto 8080(el puerto puede cambiar)
+    Terminal 2
+    $./suconnect 8080 ---------------------------------->le pasamos al archivo el puerto en que se espera el password del nivel actual
+    Terminal 1
+    VxCazJaVykI6W36BkBU0mJTCM8rR95XT ------------------->el password del nivel actual
+    Terminal 2
+    --------------------------------------------->imprime el password del bandit21
+
+
+21 -> NvEJF7oVjkddltPSrdKEFOllh9V1IBcq
+    A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in /etc/cron.d/ for the configuration and see what command is being executed.
+    Commands you may need to solve this level
+    cron, crontab, crontab(5) (use “man 5 crontab” to access this)
+
+    bandit21@bandit:~$ ls -al /etc/cron.d/
+    -rw-r--r--   1 root root   120 Oct  5  2023 cronjob_bandit22 ------------------------------------>laen mas pero como vamos vara bandit22 este es el que nos intereza
+    bandit21@bandit:~$ cat /etc/cron.d/cronjob_bandit22 --------------------------->miramos que es lo que tiene
+    @reboot bandit22 /usr/bin/cronjob_bandit22.sh &> /dev/null
+    * * * * * bandit22 /usr/bin/cronjob_bandit22.sh &> /dev/null
+    bandit21@bandit:~$ /usr/bin/cronjob_bandit22.sh ---------------------------------------->tratamos de ejecutar "/usr/bin/cronjob_bandit22.sh", pero no da otro nombre 
+    chmod: changing permissions of '/tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv': Operation not permitted
+    /usr/bin/cronjob_bandit22.sh: line 3: /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv: Permission denied
+    bandit21@bandit:~$ cat /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv -------------------------------------------------------->vemos que tiene este archivo
+
+22 ->  
+    A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in /etc/cron.d/ for the configuration and see what command is being executed.
+
+    NOTE: Looking at shell scripts written by other people is a very useful skill. The script for this level is intentionally made easy to read. If you are having problems understanding what it does, try executing it to see the debug information it prints.
+
+    Commands you may need to solve this level
+    cron, crontab, crontab(5) (use “man 5 crontab” to access this)
+
+    bandit22@bandit:~$ ls -al /etc/cron.d/
+    bandit22@bandit:~$ cat /usr/bin/cronjob_bandit23.sh
+    bandit22@bandit:~$ echo I am user bandit23 | md5sum | cut -d ' ' -f 1   ----------------------->tratando de aplicar manualmente lo que hay en /usr/bin/cronjob_bandit23.sh
+    bandit22@bandit:~$ cat /tmp/8ca319486bfbbc3663ea0fbe81326349
+
+23 -> QYw0Y2aiA672PsMmh9puTQuhoz8SyR2G
+    A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in /etc/cron.d/ for the configuration and see what command is being executed.
+
+    NOTE: This level requires you to create your own first shell-script. This is a very big step and you should be proud of yourself when you beat this level!
+
+    NOTE 2: Keep in mind that your shell script is removed once executed, so you may want to keep a copy around…
+
+    Commands you may need to solve this level
+    cron, crontab, crontab(5) (use “man 5 crontab” to access this)
+
+    cat /etc/cron.d/cronjob_bandit24 ------------------------------->miramos loque ejecura la tarea cron
+    cat /usr/bin/cronjob_bandit24.sh ------------------------------->miramos el script que ejecuta la tarea cron
+    mktemp -d ------------------------------->creamos un directorio donde podamos trabajar
+    chmod ugo+wrx /tmp/tmp.02j05dDljj ------------------------------->le damos todos los permisos
+    cd /tmp/tmp.02j05dDljj ------------------------------->entramos
+    nano script.sh ------------------------------->creamos el script que nos va a copiar la pwd a nuestro espacio de trabajo
+    chmod uog+wrx ./script.sh ------------------------------->le damos los permisos al script
+    cp script.sh /var/spool/bandit24/foo ------------------------------->copiamos el script a la carpeta, donde cronjob_bandit24.sh ejecuta todos los scripts(/var/spool/bandit24/foo)
+    cat pwd.txt ------------------------------->despues de un minuto la tarea ejecura nuestro script creando pwd.txt con la contrasenia
+
+24 -> VAfGXJ1PBSsPSnvsjI8p759leLZ9GGar
+    A daemon is listening on port 30002 and will give you the password for bandit25 if given the password for bandit24 and a secret numeric 4-digit pincode. There is no way to retrieve the pincode except by going through all of the 10000 combinations, called brute-forcing.
+    You do not need to create new connections each time
+
+    bandit24@bandit:~$ mktemp -d    -------------------------------------->
+    bandit24@bandit:~$ cd /tmp/tmp.oHnpCClIOh    -------------------------------------->
+    bandit24@bandit:~$ nano force.sh    -------------------------------------->creamos un script que cree los parametros
+
+        #!/bin/bash
+        for i in {0000..9999};do
+            echo "VAfGXJ1PBSsPSnvsjI8p759leLZ9GGar $i"
+        done
+
+    bandit24@bandit:~$ chmod ugo+wrx ./force.sh    -------------------------------------->le damos permisos para poderejecutar el script
+    bandit24@bandit:~$ ./force.sh > force.txt    -------------------------------------->pasamos las cadenas a un "diccionario"
+    bandit24@bandit:~$ cat ./force.txt | nc localhost 30002 | grep -v -E "Wrong|Please"    -------------------------------------->inyectamos la s cadenas a nc y con grep ocultamos las cadenas de error
+
+    recomiendo seccionar los parametros en el for {0000..5000} y {5001..9999} probe de corrido y como se satura, creas diccionario del 0000 al 5000 mandas esos primeros valores al nc, si no responde, creas de nuevo el diccionario ahora con los valores del 5001 al 9999
+
+25 -> p7TaowMYrmu23Ol8hiZh9UvD0O9hpx8d
+    Logging in to bandit26 from bandit25 should be fairly easy… The shell for user bandit26 is not /bin/bash, but something else. Find out what it is, how it works and how to break out of it.
+
+    para esto se requiere lanzar la conexion desde una terminal nativa de linux, ya que ocupamos travar el flujo y para ello se requiere que intervenga la herramienta "More" que solo se encuentra en linux
+
+    hacemos una ventana con muy poca altura, lanzamos la peticion de conexion, y nos aparecera algo como "--MORE--(50%)", precionamos ALT+v y nos permitira escribir lanzamos el comando ":e /etc/bandit_pass/bandit26"
+
+26 -> c7GvcKlw9mC7aUQaPx7nwFstuAIBw1o1
+    Good job getting a shell! Now hurry and grab the password for bandit27!
+    vamos ah hacer un proceso similar que en el nivel anterior, pero esta vez, una vez lanzaremos los comandos ":set shell=/bin/bas" damos enter ":shell", esto nos deveria dar la terminal de bandit26
+
+    una vez devuelta la terminal ya podemos ejecutar mas comandos
+
+    bandit26@bandit:~$ ls    ------------------------------------------------------------>miramos lo que tenemos y miramos que hay un archivo de bandit27
+    -rwsr-x---  1 bandit27 bandit26 14876 Oct  5  2023 bandit27-do
+    bandit26@bandit:~$ ./bandit27-do    ------------------------------------------------------------>lo ejecutamos y nos dice como usarlo
+    Run a command as another user.
+    Example: ./bandit27-do id
+    bandit26@bandit:~$ ./bandit27-do bash -p    ------------------------------------------------------------>abrimos una terminal desde bandit27
+    bash-5.1$ whoami    ------------------------------------------------------------>validamos que somos bandit27
+    bandit27
+    bash-5.1$ cat /etc/bandit_pass/bandit27    ------------------------------------------------------------>imprimimos el password
+
+
+27 -> YnQpBuifNMas1hcUFk70ZmqkhUU2EuaS
+    There is a git repository at ssh://bandit27-git@localhost/home/bandit27-git/repo via the port 2220. The password for the user bandit27-git is the same as for the user bandit27.
+
+    Clone the repository and find the password for the next level.
+
+    Commands you may need to solve this level
+    git
+
+
+    bandit27@bandit:~$ cd $(mktemp -d) ------------------------------------->creamos y accedemos a un directorio temporal para poder trabajar
+    bandit27@bandit:/tmp/tmp.0lnByL4ZsM$ git clone ssh://bandit27-git@localhost:2220/home/bandit27-git/repo ------------------------------------->clonamos el repo
+    bandit27@bandit:/tmp/tmp.0lnByL4ZsM$ cd repo/ ------------------------------------->accedemos al repo
+    bandit27@bandit:/tmp/tmp.0lnByL4ZsM/repo$ cat ./README ------------------------------------->miramos lo qe contien el unico archivo
+
+28 -> AVanL161y9rsbcJIsFHuw35rjaOM19nR
+    There is a git repository at ssh://bandit28-git@localhost/home/bandit28-git/repo via the port 2220. The password for the user bandit28-git is the same as for the user bandit28.
+    Clone the repository and find the password for the next level.
+
+    Commands you may need to solve this level
+    git
+
+    bandit28@bandit:~$ cd $(mktemp -d)  --------------------------------------------------->creamos un directorio temporal y accemos a el para trabajar
+    bandit28@bandit:/tmp/tmp.9lFYxJGuwY$ git clone  ssh://bandit28-git@localhost:2220/home/bandit28-git/repo    --------------------------------------------------->clonamos el repo
+    bandit28@bandit:/tmp/tmp.9lFYxJGuwY$ cd repo/   --------------------------------------------------->accedemos al repo
+    bandit28@bandit:/tmp/tmp.9lFYxJGuwY/repo$ ls    --------------------------------------------------->miramos que hay un archivo
+    README.md
+    bandit28@bandit:/tmp/tmp.9lFYxJGuwY/repo$ cat ./README.md   --------------------------------------------------->un archivo que tiene un treace
+        # Bandit Notes
+        Some notes for level29 of bandit.
+
+        ## credentials
+
+        - username: bandit29
+        - password: xxxxxxxxxx
+    bandit28@bandit:/tmp/tmp.9lFYxJGuwY/repo$ git log -p    --------------------------------------------------->miramos los cambios y notamos que ahi estaba la contra, solo que en el ultimo commit la quitaron
+
+29 -> tQKvmcwNYcFS6vmPHIUSI3ShmsrQZK8S
+    There is a git repository at ssh://bandit29-git@localhost/home/bandit29-git/repo via the port 2220. The password for the user bandit29-git is the same as for the user bandit29.
+    Clone the repository and find the password for the next level.
+
+    Commands you may need to solve this level
+    git
+
+    bandit29@bandit:$ cd $(mktemp -d)   ----------------------------------------------->creamos directorio temporal para trabajar y accedemos a el
+    bandit29@bandit:/tmp/tmp.QAH3s7C9Km/repo$ git clone ssh://bandit29-git@localhost:2220/home/bandit29-git/repo    ----------------------------------------------->clonamos el repo
+    bandit29@bandit:/tmp/tmp.QAH3s7C9Km/repo$ cd repo/  ----------------------------------------------->accedemos el repo
+    bandit29@bandit:/tmp/tmp.QAH3s7C9Km/repo$ cat ./README.md   ----------------------------------------------->miramos el contenido
+    bandit29@bandit:/tmp/tmp.QAH3s7C9Km/repo$ git log -p    ----------------------------------------------->miramos que hay en el log
+    bandit29@bandit:/tmp/tmp.QAH3s7C9Km/repo$ git branch -r ----------------------------------------------->miramos las ramas disponibles
+    bandit29@bandit:/tmp/tmp.QAH3s7C9Km/repo$ git checkout dev  ----------------------------------------------->nos vamos a la rama dev
+    bandit29@bandit:/tmp/tmp.QAH3s7C9Km/repo$ ls    ----------------------------------------------->miramos que hay mas archivos 
+    bandit29@bandit:/tmp/tmp.QAH3s7C9Km/repo$ git log -p    ----------------------------------------------->miramos el log en dev
+
+30 -> xbhV3HpNGlTIdnjUrdAlPzc2L6y9EOnS
+    There is a git repository at ssh://bandit30-git@localhost/home/bandit30-git/repo via the port 2220. The password for the user bandit30-git is the same as for the user bandit30.
+    Clone the repository and find the password for the next level.
+
+    Commands you may need to solve this level
+    git
+
+    bandit30@bandit:~$ cd $(mktemp -d)      --------------------------->creamos directorio temporal para trabajar y accedemos a el
+    bandit30@bandit:/tmp/tmp.AlPwLk9vfy$ git clone ssh://bandit30-git@localhost:2220/home/bandit30-git/repo     --------------------------->clonamos el repo
+    bandit30@bandit:/tmp/tmp.AlPwLk9vfy$ cd repo/       --------------------------->accedemos el repo
+    bandit30@bandit:/tmp/tmp.AlPwLk9vfy/repo$ cat ./*       --------------------------->miramos el contenido
+    just an epmty file... muahaha
+    bandit30@bandit:/tmp/tmp.AlPwLk9vfy/repo$ git tag       --------------------------->miramos las tags
+    secret
+    bandit30@bandit:/tmp/tmp.AlPwLk9vfy/repo$ git show secret       --------------------------->imprimimos lo que contiene la tag
+
+31 -> OoffzGDlzhAlerFJ2cAiz1D41JW1Mhmt
+    There is a git repository at ssh://bandit31-git@localhost/home/bandit31-git/repo via the port 2220. The password for the user bandit31-git is the same as for the user bandit31.
+    Clone the repository and find the password for the next level.
+
+    Commands you may need to solve this level
+    git
+
+    bandit31@bandit:~$ cd $(mktemp -d)
+    bandit31@bandit:/tmp/tmp.toYAVzIqxu$ git clone ssh://bandit31-git@localhost:2220/home/bandit31-git/repo
+    bandit31@bandit:/tmp/tmp.toYAVzIqxu$ cd repo
+    bandit31@bandit:/tmp/tmp.toYAVzIqxu/repo$ cat ./*
+        This time your task is to push a file to the remote repository.
+
+        Details:
+            File name: key.txt
+            Content: 'May I come in?'
+            Branch: master
+
+    bandit31@bandit:/tmp/tmp.toYAVzIqxu/repo$ rm ./'.gitignore' ------------------------------------>removemos el git ignore porque tiene la condicion de no agregar lo que termine con .txt
+    bandit31@bandit:/tmp/tmp.toYAVzIqxu/repo$ nano key.txt  ------------------------------------>creamos y agregamos el contenido a la llave
+    bandit31@bandit:/tmp/tmp.toYAVzIqxu/repo$ git add . ------------------------------------>agregamos el cambio
+    bandit31@bandit:/tmp/tmp.toYAVzIqxu/repo$ git commit -m 'trying get the pass'   ------------------------------------>generamos el commit
+    bandit31@bandit:/tmp/tmp.toYAVzIqxu/repo$ git push origin master    ------------------------------------>hacermso el push y nos devolvera un log que contiene el pass
+
+32 -> rmCBvG56y58BXzv98yZGdO7ATVL5dW8y
+    After all this git stuff its time for another escape. Good luck!
+
+    Commands you may need to solve this level
+    sh, man
+
+    >> $0
+    $ cat /etc/bandit_pass/bandit33
+
+33 ->odHo63fHiFqcWWJG9rLiLDtPm45KzUKy
+
+    At this moment, level 34 does not exist yet.
+    bandit33@bandit:~$ cat README.txt
+        Congratulations on solving the last level of this game!
+
+        At this moment, there are no more levels to play in this game. However, we are constantly working
+        on new levels and will most likely expand this game with more levels soon.
+        Keep an eye out for an announcement on our usual communication channels!
+        In the meantime, you could play some of our other wargames.
+
+        If you have an idea for an awesome new level, please let us know!
